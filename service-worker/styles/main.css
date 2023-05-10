@@ -1,0 +1,12 @@
+.menu ul {
+  list-style: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
+.menu li {
+  display: inline-block;
+  margin-inline-end: 1rem;
+}
