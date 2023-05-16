@@ -20,7 +20,6 @@
  * https://github.com/GoogleChrome/workbox/
  */
 
-import { EVENTS } from './scripts/events.mjs';
 import { handleRequest, preCacheResources, STRATEGIES } from './scripts/sw-utils.mjs'
 
 const CACHE_NAMES = {
@@ -46,10 +45,10 @@ globalThis.addEventListener('install', event => {
   globalThis.skipWaiting();
 
   /**
-   * An `install` event handler can be used to pre-cache resources, which the service worker can use offline.
+   * An `install` event handler can be used to pre-cache critical resources before service worker activation.
    * https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/install_event#examples
    */
-  // event.waitUntil(preCacheResources(CACHE_NAMES.Documents, APP_ROUTES));
+  event.waitUntil(preCacheResources(CACHE_NAMES.Documents, APP_ROUTES));
 
   console.log('Service worker installed.');
 });
@@ -67,17 +66,6 @@ globalThis.addEventListener('activate', event => {
   event.waitUntil(clients.claim());
 
   console.log('Service worker activated.');
-});
-
-/**
- * Listen to messages sent to the service worker.
- * https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/message_event
- */
-addEventListener('message', event => {
-  // Run pre-caching app routes during the browser idle period.
-  if (event.data.type === EVENTS.BrowserIdle) {
-    preCacheResources(CACHE_NAMES.Documents, APP_ROUTES);
-  }
 });
 
 /**

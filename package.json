@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start:worker": "npx http-server ./worker -c-1 -o",
-    "start:shared-worker": "npx http-server ./shared-worker -c-1 -o",
-    "start:service-worker": "npx http-server ./service-worker -c-1 -p 8888"
+    "start:worker": "npx http-server worker -c-1 -o",
+    "start:shared-worker": "npx http-server shared-worker -c-1 -o",
+    "start:service-worker": "npx http-server service-worker -c-1 -p 8888"
   }
 }
